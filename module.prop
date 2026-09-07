@@ -1,6 +1,6 @@
 id=dynamic_touch_sampling
 name=Dynamic Touch Sampling Rate
-version=v1.0.1
-versionCode=2
+version=v1.0.2
+versionCode=3
 author=Jc
-description=动态触感采样率调节：C语言守护进程+KernelSU WebUI可视化管理，根据前台应用智能切换120/240/480Hz，适配红米K90 Max(prague/2604FRK1EC)，低内存低耗电设计。
+description=动态触感采样率调节：C语言守护进程+液态玻璃App可视化管理，根据前台应用智能切换120/240/480Hz，常驻通知栏快捷切换，适配红米K90 Max(prague/2604FRK1EC)，低内存低耗电设计。
