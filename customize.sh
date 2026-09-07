@@ -12,8 +12,8 @@ ui_print() { echo "$1"; }
 
 ui_print "=============================================="
 ui_print "  Touch Control - 动态触感采样率调节"
-ui_print "  Version v1.0.0  |  by Jc"
-ui_print "  C语言守护进程 + KernelSU WebUI 可视化"
+ui_print "  Version v1.0.2  |  by Jc"
+ui_print "  C语言守护进程 + 液态玻璃App可视化"
 ui_print "=============================================="
 ui_print ""
 ui_print "[*] 设备: $MANUFACTURER $DEVICE_MODEL"
@@ -63,20 +63,39 @@ is_target=$IS_TARGET
 install_time=$(date)
 EOF
 
+# 安装配套 App
+ui_print "[*] 安装触感控制 App..."
+APK_PATH="$MODDIR/apk/TouchControl.apk"
+if [ -f "$APK_PATH" ]; then
+    pm install -r "$APK_PATH" >/dev/null 2>&1
+    if [ $? -eq 0 ]; then
+        ui_print "[+] App 安装成功"
+    else
+        ui_print "[!] App 安装失败, 请手动安装 apk/TouchControl.apk"
+    fi
+else
+    ui_print "[!] 未找到 App 安装包"
+fi
+
 ui_print ""
 ui_print "=============================================="
 ui_print "[+] 安装完成! 请重启设备"
 ui_print "=============================================="
 ui_print ""
 ui_print "使用方法:"
-ui_print "  1. 重启设备后, 打开 KernelSU 管理器"
-ui_print "  2. 进入模块 -> Touch Control -> 打开 WebUI"
-ui_print "  3. 在 WebUI 中可视化配置采样率和应用规则"
+ui_print "  1. 重启设备后, 打开「触感控制」App"
+ui_print "  2. 授予 Root 权限, App 将自动连接守护进程"
+ui_print "  3. 在 App 中可视化配置采样率和应用规则"
+ui_print "  4. 通知栏常驻显示当前状态, 可快捷切换模式"
 ui_print ""
 ui_print "核心功能:"
 ui_print "  - 三档采样率: 省电/平衡/高性能 (最高 480Hz)"
 ui_print "  - 应用规则: 打开不同 App 自动切换采样率"
-ui_print "  - 应用列表: 自动扫描本机已安装应用, 可视化选择"
+ui_print "  - 应用列表: 自动扫描本机应用, 系统/第三方分类"
+ui_print "  - 真实图标: 读取系统应用图标, 可视化选择"
+ui_print "  - 常驻通知: 通知栏显示当前状态, 一键切换模式"
+ui_print "  - Root 控制: 通过 Root 权限直接控制采样率"
+ui_print "  - 进程保护: Root 降低 oom_adj, 防止后台被杀"
 ui_print "  - 实时状态: 当前采样率/模式/前台应用/电量"
 ui_print "  - 低耗电: 熄屏自动降频, 低电量自动省电"
 ui_print "  - 日志记录: 完整运行日志, 方便排查"
