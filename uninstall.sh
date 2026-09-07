@@ -11,6 +11,9 @@ for f in /odm/firmware/*_gtp_thp_config.ini; do
     [ -f "$f" ] && umount "$f" 2>/dev/null
 done
 
+# 卸载配套 App
+pm uninstall com.jc.touchcontrol >/dev/null 2>&1
+
 rm -f "$RUNTIME/mode" "$RUNTIME/touchd.pid"
 if [ -d "$RUNTIME" ]; then
     cp "$RUNTIME/config.conf" /sdcard/touchd_config_backup.conf 2>/dev/null
