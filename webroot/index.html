@@ -261,7 +261,9 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
       <input type="text" id="appSearch" placeholder="搜索应用包名..." oninput="renderAppList()">
     </div>
     <div class="app-tabs">
-      <div class="app-tab active" data-tab="all" onclick="switchTab('all')">全部应用</div>
+      <div class="app-tab active" data-tab="all" onclick="switchTab('all')">全部</div>
+      <div class="app-tab" data-tab="third" onclick="switchTab('third')">第三方</div>
+      <div class="app-tab" data-tab="system" onclick="switchTab('system')">系统</div>
       <div class="app-tab" data-tab="configured" onclick="switchTab('configured')">已配置</div>
     </div>
     <div class="app-list" id="appList">
@@ -505,6 +507,8 @@ function renderAppList() {
   const list = document.getElementById('appList');
   let apps = allApps.filter(a => {
     if (currentTab === 'configured' && !profiles[a.pkg]) return false;
+    if (currentTab === 'third' && a.type !== 0) return false;
+    if (currentTab === 'system' && a.type !== 1) return false;
     if (search && !a.pkg.toLowerCase().includes(search)) return false;
     return true;
   });
