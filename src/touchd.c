@@ -918,8 +918,8 @@ static void http_handle(int fd) {
                 pos += snprintf(abuf + pos, 65536 - pos, "{\"apps\":[");
                 for (i = 0; i < g_ctx.app_count; i++) {
                     if (i > 0) pos += snprintf(abuf + pos, 65536 - pos, ",");
-                    pos += snprintf(abuf + pos, 65536 - pos, "{\"pkg\":\"%s\",\"name\":\"%s\"}",
-                            g_ctx.apps[i].pkg, g_ctx.apps[i].name);
+                    pos += snprintf(abuf + pos, 65536 - pos, "{\"pkg\":\"%s\",\"name\":\"%s\",\"type\":%d}",
+                            g_ctx.apps[i].pkg, g_ctx.apps[i].name, g_ctx.apps[i].type);
                     if (pos > 64000) break;
                 }
                 pos += snprintf(abuf + pos, 65536 - pos, "],\"count\":%d}", g_ctx.app_count);
